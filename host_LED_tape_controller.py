@@ -3,6 +3,7 @@ import pyscreenshot as ImageGrab
 import numpy as np
 import requests
 from time import sleep
+import json
 
 # API_ENDPOINT = "http://192.168.0.36/"
 # API_ENDPOINT = sys.argv[1]
@@ -20,7 +21,7 @@ def averageColorOfScreen():
     data = {
             'RGBcolor':[r,g,b]
             } 
-    r = requests.post(url = API_ENDPOINT, data = data)
+    r = requests.post(url = API_ENDPOINT, data = json.dumps(data))
     print('Server response: ', r.text)
 
 if __name__ == '__main__':
