@@ -18,7 +18,7 @@ class S(BaseHTTPRequestHandler):
         [r, g, b] = json.loads(post_data.decode('utf-8'))['RGBcolor']
         print("Red: {} Green: {} Blue: {}".format(r,g,b))
         controller.update_device(r,g,b)
-
+        
         self._set_response()
         self.wfile.write("POST request for {}".format(self.path).encode('utf-8'))
 
@@ -36,10 +36,10 @@ def run(server_class=HTTPServer, handler_class=S, port=8080):
 
 if __name__ == '__main__':
     from sys import argv
-    controller = MagicHomeApi(argv[1], 1)
+    controller = MagicHomeApi('192.168.0.37', 1)
     controller.turn_on()
 
     if len(argv) == 2:
-        run(port=int(argv[2]))
+        run(port=int(argv[1]))
     else:
         run()

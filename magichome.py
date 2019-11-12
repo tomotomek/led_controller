@@ -26,7 +26,7 @@ class MagicHomeApi:
         self.latest_connection = datetime.datetime.now()
         self.keep_alive = keep_alive
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.s.settimeout(3)
+        self.s.settimeout(1)
         try:
             print("Establishing connection with the device.")
             self.s.connect((self.device_ip, self.API_PORT))
@@ -150,9 +150,6 @@ class MagicHomeApi:
         check_connection_time = (datetime.datetime.now() -
                                  self.latest_connection).total_seconds()
         try:
-            if check_connection_time >= 290:
-                print("Connection timed out, reestablishing.")
-                self.s.connect((self.device_ip, self.API_PORT))
             message_length = len(bytes)
             self.s.send(struct.pack("B"*message_length, *bytes))
             # Close the connection unless requested not to
