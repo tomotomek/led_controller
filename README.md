@@ -14,4 +14,4 @@ Led controller controls LED tape by averaging screenshot color. Create in (nodej
    - host_LED_tape_controller.py
   
   run script:
-  ```python3 host_LED_tape_controller.py <server address>
+  ```python3 host_LED_tape_controller.py <server address>```
