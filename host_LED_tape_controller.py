@@ -5,10 +5,7 @@ import requests
 from time import sleep
 import json
 
-# API_ENDPOINT = "http://192.168.0.36/"
-# API_ENDPOINT = sys.argv[1]
-# INTERVAL = sys.argv[2]
-API_ENDPOINT = "http://localhost:31480/"
+API_ENDPOINT = sys.argv[1]
 INTERVAL = 3
 
 def averageColorOfScreen():
