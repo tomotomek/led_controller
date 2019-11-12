@@ -5,8 +5,9 @@ import requests
 from time import sleep
 import json
 
-API_ENDPOINT = sys.argv[1]
-INTERVAL = 3
+#API_ENDPOINT = sys.argv[1]
+API_ENDPOINT = 'http://192.168.0.36:31480'
+INTERVAL = 1
 
 def averageColorOfScreen():
     image = ImageGrab.grab()
