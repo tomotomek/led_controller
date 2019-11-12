@@ -32,4 +32,4 @@ if __name__ == '__main__':
       sleep(INTERVAL)
     except:
       print('Probably server at {} is disconnected'.format(API_ENDPOINT))
-      break
+      sleep(5*60)
