@@ -3,10 +3,8 @@ import pyscreenshot as ImageGrab
 import numpy as np
 import requests
 from time import sleep
-import json
+from magichome import MagicHomeApi
 
-#API_ENDPOINT = sys.argv[1]
-API_ENDPOINT = 'http://192.168.0.36:31480'
 INTERVAL = 1
 
 def averageColorOfScreen():
@@ -15,19 +13,21 @@ def averageColorOfScreen():
     r = int(np.mean(imageMatrix[:,:,0]))
     g = int(np.mean(imageMatrix[:,:,1]))
     b = int(np.mean(imageMatrix[:,:,2]))
-    print([r, g, b])
-    data = {
-            'RGBcolor':[r,g,b]
-            } 
-    r = requests.post(url = API_ENDPOINT, data = json.dumps(data))
-    print('Server response: ', r.text)
+    rgb = [r,g,b]
+    rgb[rgb.index(min(rgb))] = int(rgb[rgb.index(min(rgb))] * 0.5) #FIEXME
+    rgb[rgb.index(max(rgb))] = min(255, int(rgb[rgb.index(max(rgb))] * 1.8)) #FIEXME
+    print(rgb)
+    
+    controller.update_device(rgb[0], rgb[1], rgb[2])
+
 
 if __name__ == '__main__':
-
+  controller = MagicHomeApi('192.168.0.27', 1)
+  controller.turn_on()
   while True:
     try:
       averageColorOfScreen()
       sleep(INTERVAL)
     except:
-      print('Probably server at {} is disconnected'.format(API_ENDPOINT))
+      print('Something went wrong')
       sleep(5*60)
